@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import './App.css'
-import { TodocContainer } from './components/TodocContainer'
+import { useState } from 'react';
+import './App.css';
+import { TodoContainer } from './components/TodoContainer';
+import { TodoForm } from './components/TodoForm';
+
 
 function App() {
   return (
-    <div className="App">
-      <TodocContainer />
-    </div>
-  )
+    <>
+      <TodoContainer />
+      <TodoForm />
+    </>
+  );
 }
-export default App
+
+export default App;
 
