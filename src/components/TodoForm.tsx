@@ -8,9 +8,9 @@ export const TodoForm = () => {
     }
     return (
         <form className='todo-form' onSubmit={handlesubmit}>
-            <input 
+            <input className="text-red-500"
                 type="text" 
-                placeholder="New Todo" 
+                placeholder="New Todo"
                 value={inputValue} 
                 onChange={(e) => setInputValue(e.target.value)} 
             />
