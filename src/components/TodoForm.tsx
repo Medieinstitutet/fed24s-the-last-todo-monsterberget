@@ -1,20 +1,34 @@
 import { useState } from "react";
+import { Todo } from "../types/todo";
+import React from "react";
 
-export const TodoForm = () => {
-    const [inputValue, setInputValue] = useState("");
+type TodoFormProps = {
+    addTodo: (inputValue: string) => void;
+};
+
+export const TodoForm = ({addTodo}: TodoFormProps) => {
+    const [inputValue, setInputValue] = useState<string>("");
+    
     const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(inputValue);
-    }
+        addTodo(inputValue);
+        setInputValue("");
+    };
     return (
         <form className='todo-form' onSubmit={handlesubmit}>
-            <input className="text-red-500"
-                type="text" 
-                placeholder="New Todo"
-                value={inputValue} 
-                onChange={(e) => setInputValue(e.target.value)} 
+            <input
+             value={inputValue}
+             className="flex-grow px-3 py-3 h-14 border pr-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+             type="text" 
+             placeholder="New Todo"
+             onChange={(e) => setInputValue(e.target.value)} 
+                
             />
-            <button type="submit" className='todo-btn'>Add todo</button>
+            <button
+             className='bg-amber-500 border-none rounded-full bg-range-600 w-32 h-14 text-white text-lg font-medium cursor-pointer' type="submit"
+             >
+            Add Todo
+            </button>
             </form>
     );
 }
