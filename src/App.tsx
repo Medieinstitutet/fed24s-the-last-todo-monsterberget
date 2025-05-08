@@ -1,14 +1,7 @@
 import './App.css'
-import {TodoForm} from './components/TodoForm'
-import {Todolist} from './components/TodoList'
+import { TodoView } from './components/todoview.tsx';
 
-function App() {
-  return (
-    <>
-      <Todolist />
-      <TodoForm />
-    </>
-  )
-}
+const App = () => < TodoView />
+
 export default App
 

@@ -1,30 +1,55 @@
-import { Todo } from "../models/Todo";
+import { useEffect } from "react";
+import React from "react";
+import { Todo } from "../types/Todo";
 
 
 type TodoListProps = {
     todos: Todo[];
-    removeTodo: (id: number) => void;
-    addTodo: (todo: Todo) => void;
+    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-export const TodoList = ({ todos, removeTodo}: TodoListProps) => {
+export const TodoList = ({ todos, setTodos }: TodoListProps) => {
+
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
+
+
+
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-            <h1 className="text-3xl font-bold mb-4">Todo List</h1>
-            <ul className="list-disc list-inside">
-                {todos.map((todo) => (
-                    <li key={todo.id} className="mb-2">
-                        {todo.title}
-                        <button
-                            onClick={() => removeTodo(todo.id)}
-                            className="ml-2 text-red-500 hover:text-red-700"
-                        >
-                            Ta bort
-                        </button>
-                    </li>
-                ))}S
-            </ul>
-        </div>
-    );
-}
+        <ul className='space-y-4'>
+          {todos.map((todo) => (
+            <li
+              key={todo.id}
+              className='flex items-center p-3 rounded-lg bg-slate-200 border border-gray-200'
+            >
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() =>
+                  setTodos(
+                    todos.map((t) =>
+                      t.id === todo.id ? {...t, completed: !t.completed} : t
+                    )
+                  )
+                }
+                className='mr-3 h-5 w-5 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500'
+              />
+              <span
+                className={`flex-grow ${todo.completed ? "line-through" : "text-gray-500"}`}>{todo.text}</span>
+              <button
+                onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}
+                className="ml-3 border-none bg-red-500 text-white rounded-full px-3 py-1"
+              >Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      );
+    };
+    
+    export default TodoList;
+
+    
+
 
