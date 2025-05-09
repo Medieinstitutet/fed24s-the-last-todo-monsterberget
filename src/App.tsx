@@ -1,5 +1,5 @@
 import './App.css'
-import { TodoView } from './components/todoview.tsx';
+import { TodoView } from './components/TodoView.tsx'
 
 const App = () => < TodoView />
 

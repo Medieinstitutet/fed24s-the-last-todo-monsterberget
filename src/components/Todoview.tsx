@@ -47,7 +47,7 @@ export function TodoView() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
-            <div className="bg-white shadow-lg rounded-3xl p-16">
+            <div className="bg-white shadow-lg min-h-[600px] mt-2 rounded-3xl p-16 ">
                 <h1 className='text-3xl font-bold text-center text-black mb-6'>Got To Do-Do</h1>
                 <TodoForm addTodo={addTodo} sortTodos={sortTodos}/>
                 <Todolist todos={todos} setTodos={setTodos} />
