@@ -18,37 +18,35 @@ export const TodoList = ({ todos, setTodos }: TodoListProps) => {
 
     return (
         <ul className='space-y-4'>
-          {todos.map((todo) => (
+          {todos.map(({ id, completed, text }) => (
             <li
-              key={todo.id}
-              className='flex items-center p-3 rounded-lg bg-slate-200 border border-gray-200'
+              key={id}
+              className='flex items-center mt-3 p-4 rounded-3xl bg-slate-200 border border-gray-200'
             >
               <input
                 type="checkbox"
-                checked={todo.completed}
+                checked={completed}
                 onChange={() =>
-                  setTodos(
-                    todos.map((t) =>
-                      t.id === todo.id ? {...t, completed: !t.completed} : t
-                    )
-                  )
+                  setTodos(todos.map((t) => t.id === id ? { ...t, completed: !completed } : t))
                 }
                 className='mr-3 h-5 w-5 rounded-full border-gray-300 text-blue-600 focus:ring-blue-500'
               />
-              <span
-                className={`flex-grow ${todo.completed ? "line-through" : "text-gray-500"}`}>{todo.text}</span>
+              <span className={`flex-grow ${completed ? "line-through" : "text-gray-500"}`}>
+                {text}
+              </span>
               <button
-                onClick={() => setTodos(todos.filter((t) => t.id !== todo.id))}
-                className="ml-3 border-none bg-red-500 text-white rounded-full px-3 py-1"
-              >Delete
+                onClick={() => setTodos(todos.filter((t) => t.id !== id))}
+                className="ml-3 border-none bg-red-500 text-white rounded-full px-3 py-1 hover:bg-red-700"
+              >
+                Delete
               </button>
             </li>
           ))}
         </ul>
-      );
-    };
+    );
+};
     
-    export default TodoList;
+export default TodoList;
 
     
 

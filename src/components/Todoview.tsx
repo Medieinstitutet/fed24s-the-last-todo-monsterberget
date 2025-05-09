@@ -32,11 +32,24 @@ export function TodoView() {
 
         }
     };
+    const [isAscending, setIsAscending] = useState(true);
+    const sortTodos = () => {
+        const sortedTodos = [...todos].sort((a, b) => {
+            if (isAscending) {
+                return a.text.localeCompare(b.text);
+            } else {
+                return b.text.localeCompare(a.text);
+            }
+        });
+        setTodos(sortedTodos);
+        setIsAscending(!isAscending);
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500">
             <div className="bg-white shadow-lg rounded-3xl p-16">
                 <h1 className='text-3xl font-bold text-center text-black mb-6'>Got To Do-Do</h1>
-                <TodoForm addTodo={addTodo} />
+                <TodoForm addTodo={addTodo} sortTodos={sortTodos}/>
                 <Todolist todos={todos} setTodos={setTodos} />
             </div>
         </div>

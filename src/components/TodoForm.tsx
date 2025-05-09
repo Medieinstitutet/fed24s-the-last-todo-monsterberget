@@ -3,9 +3,10 @@ import { useState } from "react";
 
 type TodoFormProps = {
     addTodo: (inputValue: string) => void;
+    sortTodos: () => void;
 };
 
-export const TodoForm = ({addTodo}: TodoFormProps) => {
+export const TodoForm = ({addTodo, sortTodos}: TodoFormProps) => {
     const [inputValue, setInputValue] = useState<string>("");
     
     const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,9 +25,13 @@ export const TodoForm = ({addTodo}: TodoFormProps) => {
                 
             />
             <button
-             className='bg-amber-500 border-none rounded-full bg-range-600 w-32 h-14 text-white text-lg font-medium cursor-pointer' type="submit"
+             className='bg-amber-500 border-none ml-2 rounded-full bg-range-600 w-32 h-14 text-white text-lg font-medium cursor-pointer' type="submit"
              >
             Add Todo
+            </button>
+            <button className='bg-amber-500 ml-2 border-none rounded-full bg-range-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'
+             onClick={() => sortTodos()}>
+                SORT
             </button>
             </form>
     );
